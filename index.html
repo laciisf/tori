@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Történelem Vázlat: Reformkor és Szabadságharc</title>
+    <style>
+        :root {
+            --bg-color-light: #f8f9fa;
+            --text-color-light: #212529;
+            --header-bg-light: #ffffff;
+            --card-bg-light: #ffffff;
+            --accent-color: #007bff;
+            --border-color-light: #dee2e6;
+            --countdown-bg-light: #e9ecef;
+
+            --bg-color-dark: #121212;
+            --text-color-dark: #e0e0e0;
+            --header-bg-dark: #1e1e1e;
+            --card-bg-dark: #2c2c2c;
+            --border-color-dark: #444444;
+            --countdown-bg-dark: #343a40;
+
+
+            --bg-color: var(--bg-color-light);
+            --text-color: var(--text-color-light);
+            --header-bg: var(--header-bg-light);
+            --card-bg: var(--card-bg-light);
+            --border-color: var(--border-color-light);
+            --countdown-bg: var(--countdown-bg-light);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        html.dark {
+            --bg-color: var(--bg-color-dark);
+            --text-color: var(--text-color-dark);
+            --header-bg: var(--header-bg-dark);
+            --card-bg: var(--card-bg-dark);
+            --border-color: var(--border-color-dark);
+            --countdown-bg: var(--countdown-bg-dark);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2em;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        nav a {
+            color: var(--accent-color);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.2s, color 0.2s;
+            border: 1px solid var(--accent-color);
+        }
+
+        nav a:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .countdown-container {
+            background-color: var(--countdown-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .countdown-container h2 {
+            margin-top: 0;
+        }
+        .countdown-timer {
+            font-size: 1.1em;
+            font-weight: 500;
+            margin: 5px 0;
+        }
+        .target-time {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .year {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: background-color 0.3s, border-color 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            scroll-margin-top: 150px; /* EZ A JAVÍTÁS a scroll problémára */
+        }
+        
+        .card h2, .card h3 {
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+
+        .theme-switcher {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        .theme-switcher:hover {
+            transform: scale(1.05);
+        }
+        .theme-switcher span {
+            margin-left: 8px;
+        }
+
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5em;
+            }
+            .container {
+                padding: 10px;
+            }
+            .card {
+                padding: 15px;
+                scroll-margin-top: 120px; /* Mobilra kisebb érték */
+            }
+            nav {
+                gap: 5px;
+            }
+            nav a {
+                padding: 6px 10px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Reformkor, 1848. március 15. és az 1848-49-es szabadságharc</h1>
+            <nav>
+                <a href="#fogalmak">Fogalmak</a>
+                <a href="#szemelyek">Fontos személyek</a>
+                <a href="#evszamok">Évszámok</a>
+                <a href="#egyeb">Egyéb</a>
+                <a href="#essays">Esszék</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="countdown-container">
+            <h2>Dolgozatig hátralévő idő:</h2>
+            <p id="countdown-a" class="countdown-timer">11. A - Számolás...</p>
+            <p id="countdown-e" class="countdown-timer">11. E - Számolás...</p>
+        </div>
+    
+        <div id="fogalmak" class="card">
+            <h2>I. Fogalmak</h2>
+            <ul>
+                <li><strong>Reform</strong> - változtatás, megújulás a fejlődés érdekében.</li>
+                <li><strong>Ősiség</strong> - a nemesi birtok nem volt eladható, csak örökölhető.</li>
+                <li><strong>Közteherviselés</strong> - mindenki fizet adót (nem csak a jobbágy).</li>
+                <li><strong>Diéta (Pozsonyban)</strong> - magyar országgyűlés.</li>
+                <li><strong>Érdekegyesítés</strong> - nemesek és nem-nemesek összefogása a nemzet érdekében.</li>
+                <li><strong>Jobbágyfelszabadítás</strong> - a jobbágyok földet kapnak, megszűnik a robot és a dézsma.</li>
+                <li><strong>Önkéntes örökváltság</strong> - a jobbágy pénzzel megválthatja magát, ha a földesúr beleegyezik.</li>
+                <li><strong>Kötelező örökváltság</strong> - az állam biztosítja minden jobbágy felszabadítását.</li>
+                <li><strong>Nádor</strong> - a király helyettese Magyarországon.</li>
+                <li><strong>Cenzus</strong> - vagyonhoz kötött választójog.</li>
+                <li><strong>„Népek tavasza"</strong> - <span class="year">1848</span>-ban forradalmak Európa-szerte.</li>
+            </ul>
+        </div>
+        
+        <div id="szemelyek" class="card">
+            <h2>II. Fontos személyek</h2>
+            <ul>
+                <li><strong>Széchenyi István</strong> - a legnagyobb magyar", Hitel, Világ, Stádium; Lánchíd építése.</li>
+                <li><strong>Kossuth Lajos</strong> - a reformmozgalom vezére, Védegylet alapítója.</li>
+                <li><strong>Deák Ferenc</strong> - „a haza bölcse", az áprilisi törvények kidolgozója.</li>
+                <li><strong>Wesselényi Miklós</strong> - „árvízi hajós".</li>
+                <li><strong>V. Ferdinánd</strong> - uralkodó <span class="year">1848</span>-ig.</li>
+                <li><strong>Ferenc József</strong> - <span class="year">1848</span> decemberétől császár.</li>
+                <li><strong>I. Miklós cár</strong> - orosz cár, aki segítette leverni a szabadságharcot.</li>
+                <li><strong>Márciusi ifjak</strong> - Petőfi Sándor, Vasvári Pál, Jókai Mór.</li>
+                <li><strong>Bem József</strong> - lengyel tábornok, erdélyi hadvezér.</li>
+                <li><strong>Jellasics</strong> - horvát bán, aki támadta Magyarországot.</li>
+                <li><strong>Móga János</strong> - magyar fővezér.</li>
+                <li><strong>Görgei Artúr</strong> - honvédsereg fővezére.</li>
+                <li><strong>Gábor Áron</strong> - székely ágyúöntő.</li>
+            </ul>
+        </div>
+
+        <div id="evszamok" class="card">
+            <h2>III. Évszámok</h2>
+            <ul>
+                <li><span class="year">1830-1848</span> - reformkor időszaka.</li>
+                <li><span class="year">1844</span> - magyar államnyelv.</li>
+                <li><span class="year">1848. március 15.</span> - pesti forradalom.</li>
+                <li><span class="year">1848. április 11.</span> - áprilisi törvények.</li>
+                <li><span class="year">1848. szeptember 11.</span> - Jellasics támadása.</li>
+                <li><span class="year">1848. október 30.</span> - Schwechati vereség.</li>
+                <li><span class="year">1849. április 14.</span> - Függetlenségi Nyilatkozat, trónfosztás.</li>
+                <li><span class="year">1849. május 21.</span> - Buda visszafoglalása.</li>
+                <li><span class="year">1849. július 31.</span> - Segesvár, Petőfi eltűnése.</li>
+                <li><span class="year">1849. augusztus 13.</span> - világosi fegyverletétel.</li>
+                <li><span class="year">1849. október 6.</span> - aradi vértanúk kivégzése.</li>
+            </ul>
+        </div>
+        
+        <div id="egyeb" class="card">
+            <h2>IV. Egyéb feladatok / ismeretek</h2>
+            <ol>
+                <li><strong>Reformkori országgyűlés működése</strong> - kétkamarás, főrendi és alsótábla.</li>
+                <li><strong>Klasszicista stílus jellemzői</strong> - oszlopok, antik minták, egyszerű, szabályos formák.</li>
+                <li><strong>Kossuth és Széchenyi programja, vitája</strong>
+                    <ul>
+                        <li>Széchenyi: óvatos, lassú reformok, arisztokrácia vezetésével.</li>
+                        <li>Kossuth: radikálisabb, gyors változások, nép bevonása.</li>
+                    </ul>
+                </li>
+                <li><strong>Március 15-i események és követelések</strong> - 12 pont, Nemzeti dal, cenzúra eltörlése, sajtószabadság.</li>
+                <li><strong>Az áprilisi törvények</strong> - jobbágyfelszabadítás, közteherviselés, népképviselet, felelős kormány.</li>
+                <li><strong>Honvéd háború kezdete</strong> - Jellasics támadása.</li>
+                <li><strong>Tavaszi hadjárat eredményei</strong> - magyar győzelmek, Buda felszabadítása.</li>
+                <li><strong>Szabadságharc vége, megtorlás</strong> - világosi fegyverletétel, aradi vértanúk kivégzése, Haynau rémuralma.</li>
+            </ol>
+        </div>
+
+        <section id="essays" class="card">
+            <h2>Esszék</h2>
+
+            <h3>1. Széchenyi István politikai és gyakorlati tevékenysége</h3>
+            <h4>a) Széchenyi szerepe a reformkorban</h4>
+            <p>Széchenyi Istvánt gyakran nevezik a „legnagyobb magyarnak". Célja: Magyarország modernizálása, felzárkóztatása a fejlett Nyugat-Európához. Úgy gondolta, hogy fentről lefelé, az arisztokrácia vezetésével kell beindítani a változásokat. Óvatos reformer: félt a forradalmi változásoktól, a rendi világ békés átalakítását támogatta.</p>
+            
+            <h4>b) Művei és gondolatai</h4>
+            <ul>
+                <li><strong>Hitel (<span class="year">1830</span>):</strong>
+                    <ul>
+                        <li>Fő gondolat: Magyarország gazdasági elmaradottságának oka az ősiség törvénye és a jobbágyrendszer.</li>
+                        <li>Megoldás: hitelfelvétel lehetősége, szabad birtokforgalom, modern gazdaság bevezetése.</li>
+                    </ul>
+                </li>
+                <li><strong>Világ (<span class="year">1831</span>):</strong> válasz a Hitel bírálóinak.</li>
+                <li><strong>Stádium (<span class="year">1833</span>):</strong> 12 törvényjavaslat polgári átalakulás alapjai.</li>
+            </ul>
+
+            <h4>c) Gyakorlati tevékenysége</h4>
+            <p><strong>Infrastruktúra fejlesztése:</strong></p>
+            <ul>
+                <li>Lánchíd (Széchenyi kezdeményezése, Clark Ádám építette).</li>
+                <li>Gőzhajózás a Dunán.</li>
+                <li>Támogatta a vasútépítést.</li>
+            </ul>
+            <p><strong>Társadalmi-kulturális kezdeményezései:</strong></p>
+            <ul>
+                <li>Kaszinó létrehozása (társasági, kulturális központ).</li>
+                <li>Lóversenyek, sport népszerűsítése.</li>
+                <li>Magyar Tudós Társaság (MTA) támogatása → nyelv és tudomány fejlesztése.</li>
+            </ul>
+
+            <h4>d) Politikai állásfoglalása</h4>
+            <p>Arisztokratikus reformer – lassú, békés változások. Elutasította a forradalmat, mert félt az anarchiától.</p>
+            <p><strong>Vita Kossuth Lajossal:</strong></p>
+            <ul>
+                <li>Széchenyi: lassú fejlődés, az arisztokrácia vezetésével.</li>
+                <li>Kossuth: gyors, radikális változások, a nép széles rétegeinek bevonásával.</li>
+            </ul>
+            <p>Széchenyi ezért gyakran konzervatívabbnak számított a kortársaihoz képest.</p>
+            
+            <h4>e) Összegzés</h4>
+            <p>Széchenyi tevékenysége nélkülözhetetlen alapot teremtett a reformkorhoz. Bár nem forradalmár volt, gyakorlati munkájával hozzájárult Magyarország polgári fejlődéséhez. Hatása: a reformkor elindítója és a polgári átalakulás egyik előkészítője.</p>
+            <hr style="border-color: var(--border-color); margin: 2rem 0;">
+            <h3>2. A március 15-i események és azok eredményei</h3>
+            <h4>a) Előzmények</h4>
+            <p>„Népek tavasza" (<span class="year">1848</span>): Európában forradalmi hullám (Párizs, Bécs, Berlin). Magyarországon a reformkor évtizedei előkészítették a változásokat. Márciusi ifjak (Petőfi Sándor, Vasvári Pál, Jókai Mór) → radikális, fiatal értelmiségiek.</p>
+
+            <h4>b) A forradalom napja - <span class="year">1848. március 15.</span></h4>
+            <ul>
+                <li>Reggel: a Pilvax kávéházban összegyűlt ifjak.</li>
+                <li>12 pont és a Nemzeti dal megfogalmazása és nyilvános felolvasása.</li>
+                <li>Nyomda elfoglalása – cenzúra eltörlése, szabad sajtó.</li>
+                <li>Tüntetés a Nemzeti Múzeum előtt – nagy tömeg támogatja őket.</li>
+                <li>Este: Bécsben is győz a forradalom, a magyar követelések teljesülnek.</li>
+            </ul>
+
+            <h4>c) A 12 pont követelései</h4>
+            <ol>
+                <li>Sajtószabadság, cenzúra eltörlése.</li>
+                <li>Felelős magyar kormány Buda-Pesten.</li>
+                <li>Évenkénti országgyűlés Pesten.</li>
+                <li>Törvény előtti egyenlőség.</li>
+                <li>Nemzeti őrsereg.</li>
+                <li>Közös teherviselés.</li>
+                <li>Jobbágyfelszabadítás.</li>
+                <li>Esküdtszék.</li>
+                <li>Nemzeti Bank.</li>
+                <li>Katonaság ne legyen külföldre vihető, idegen katonát ne hozzanak.</li>
+                <li>Politikai foglyok szabadon bocsátása.</li>
+                <li>Unió Erdéllyel.</li>
+            </ol>
+
+            <h4>d) Eredmények - Áprilisi törvények (<span class="year">1848. április 11.</span>)</h4>
+            <p>Király (V. Ferdinánd) szentesíti az új törvényeket.</p>
+            <ul>
+                <li>Jobbágyfelszabadítás - megszűnik a robot, dézsma, örökös jobbágyság.</li>
+                <li>Közteherviselés - mindenki adózik.</li>
+                <li>Népképviseleti országgyűlés - szélesebb választójog (cenzus).</li>
+                <li>Felelős magyar kormány - Batthyány Lajos miniszterelnök.</li>
+                <li>Sajtószabadság, egyesülési szabadság.</li>
+            </ul>
+            
+            <h4>e) Következmények</h4>
+            <p>Magyarország történetének első modern, polgári törvényalkotása. Az ország békés úton vált alkotmányos, polgári állammá. Rövid ideig sikerült, de a Habsburgok és az orosz cár segítségével leverték a szabadságharcot.</p>
+            
+            <h4>f) Jelentősége</h4>
+            <p>Március 15. nemzeti ünnep, a magyar szabadság és függetlenség szimbóluma. Az áprilisi törvények a polgári Magyarország alapjai. Bár a szabadságharc elbukott, a reformok eszméje tovább élt.</p>
+        </section>
+    </div>
+
+    <div class="theme-switcher" id="theme-switcher">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-text">Sötét mód</span>
+    </div>
+
+    <script>
+        // Téma váltó
+        const themeSwitcher = document.getElementById('theme-switcher');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeText = document.getElementById('theme-text');
+        const docHtml = document.documentElement;
+
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            docHtml.classList.add('dark');
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Világos mód';
+        }
+
+        themeSwitcher.addEventListener('click', () => {
+            docHtml.classList.toggle('dark');
+            const isDarkMode = docHtml.classList.contains('dark');
+            themeIcon.textContent = isDarkMode ? '☀️' : '🌙';
+            themeText.textContent = isDarkMode ? 'Világos mód' : 'Sötét mód';
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        });
+
+        // Visszaszámláló
+        const countdowns = [
+            { id: 'countdown-a', label: '11. A', time: '11:45', date: '2025-10-03T11:45:00' },
+            { id: 'countdown-e', label: '11. E', time: '13:30', date: '2025-10-03T13:30:00' }
+        ];
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const oneDay = 1000 * 60 * 60 * 24;
+
+            countdowns.forEach(countdown => {
+                const targetDate = new Date(countdown.date).getTime();
+                const distance = targetDate - now;
+                const element = document.getElementById(countdown.id);
+
+                let content = `${countdown.label} - `;
+                const timeSpan = `<span class="target-time">(${countdown.time})</span>`;
+
+                if (distance < 0) {
+                    content += `Dolgozat megírva. ${timeSpan}`;
+                } else {
+                    const days = Math.floor(distance / oneDay);
+                    const hours = Math.floor((distance % oneDay) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    
+                    if (days < 1 && distance > 0) {
+                        // ÓÓ:PP:MP formátum
+                        content += `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${timeSpan}`;
+                    } else {
+                        // Napokat is mutató formátum
+                        content += `${days}n ${hours}ó ${minutes}p ${seconds}m ${timeSpan}`;
+                    }
+                }
+                element.innerHTML = content;
+            });
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
